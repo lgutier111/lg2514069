@@ -1,0 +1,4 @@
+      The balance on the account: $ 4620.77
+    The total amount of deposits: $ 1595.57
+ The total amount of withdrawals: $  755.16
+    The total amount of interest: $ 56.3582
