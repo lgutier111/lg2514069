@@ -1,0 +1,10 @@
+Exception: STATUS_INTEGER_DIVIDE_BY_ZERO at eip=00401338
+eax=0000000A ebx=0022AC8C ecx=0022AB20 edx=00000000 esi=00000000 edi=0022CDB4
+ebp=0022AC38 esp=0022AB00 program=C:\Documents and Settings\HP_Administrator\My Documents\NetBeansProjects\GaddisChapter6_Prob22\dist\Debug\Cygwin_4.x-Windows\gaddischapter6_prob22.exe, pid 3052, thread main
+cs=001B ds=0023 es=0023 fs=003B gs=0000 ss=0023
+Stack trace:
+Frame     Function  Args
+0022AC38  00401338 (0000000A, 0022AC58, 00000000, 00000000)
+0022AC68  0040124A (00000001, 0022AC8C, 20010100, 61007F58)
+0022AD28  61007FB5 (00000000, 0022CDB4, 61007120, 00000000)
+End of stack trace
