@@ -12,6 +12,7 @@
  *      2. At the end of the game, win or lose, get user name
  *      3. Save the user name and score to a file
  *      4. Display the top 10 highest scores
+ *      5. Added a timer to allow a certain amount of time per skill level
  *  
  * Created on January 30, 2014, 5:34 PM
  */
@@ -46,8 +47,7 @@ void sortAray (vector<int>, vector<string>, int);
 int main() {
 
     //Declare Variables
-    //const int SIZE = 10;                           //***Limit to win***
-    int validL = 0, n = 1, SIZE = 1, score = 0;
+    int validL = 0, n = 1, SIZE = 1, score = 0, timeElps = 0;
     char simon[SIZE], user[n];
     bool result;
     int skillL;
@@ -56,7 +56,7 @@ int main() {
 
     disGame();                          //Display initial screen
     
-    //Display initial message to let the user know to turn on the caps lock key
+    //Display initial message to let the user know to turn on the caps lock 
     cout << "***** TURN ON THE CAPS LOCK KEY *****\n";
     cout << "*****     TO PLAY THIS GAME     *****\n\n";
     cout << "\n\n\n  READY TO PLAY...   HIT ENTER... \n";
@@ -64,7 +64,7 @@ int main() {
     
     //Get skill level
     skillL = getSkill(SIZE);
-       
+    
     //Set the random number generator
     srand(static_cast<unsigned int>(time(0)));
     
@@ -76,13 +76,56 @@ int main() {
     do{
         //Begin playing the game until the pattern by the user is broken
         advDis ();                      //Advance screen to clear it and wait
-        disGame ();                     //Display with all *
+        disGame ();                     //Display with all spaces
         advDis ();                      //Advance screen to clear it and wait
         disGame (simon, n);             //Display with 1 character of pattern
 
+        //Set the clock to start counting seconds here 
+        int strTime = time(0);
+        
         //Get the user input pattern up to the nth iteration
         validL = getUsrIn(user, n);
-    
+        
+        //Verify the user time entry only if the validL came back true.  If
+        //it came back false "0", then there's no need to check the time
+        //entry.
+        if (validL != 0)
+        {
+            //Set the clock to stop the time here after the user has input 
+            //their pattern and hit the enter key.
+            int endTime = time(0);
+        
+            //Calculate time elapsed
+            timeElps = 0;                                   //reset time
+            timeElps = endTime - strTime;
+        
+            //Verify time it took user to input pattern.
+            //Skill level 1 = 18 second limit
+            //Skill level 2 = 14 second limit
+            //Skill level 3 = 10 second limit
+            if (skillL == 1){
+                if (timeElps > 18){
+                    validL = 0;
+                    cout << "\n\nToo much time! ";
+                    cout << "Time elapsed was " << timeElps << " seconds.\n\n";
+                }
+            }
+            if (skillL == 2){
+                if (timeElps > 14){
+                    validL = 0;
+                    cout << "\n\nToo much time! ";
+                    cout << "Time elapsed was " << timeElps << " seconds.\n\n";
+                }
+            }
+            if (skillL == 3){
+                if (timeElps > 10){
+                    validL = 0;
+                    cout << "\n\nToo much time! ";
+                    cout << "Time elapsed was " << timeElps << " seconds.\n\n";
+                }
+            }
+        }
+        
         //Validate user input
         if (validL == 1)
             result = compare(simon, user, n);
@@ -109,10 +152,21 @@ int main() {
     //Display the score
     cout << "Your score is : " << score << endl;
     
-    //Ask user for their name (up to 25 characters).
-    cout << "Enter your first name (up to 10 characters): ";
-    cin >> name;
-   
+    //Ask user for their name (up to 10 characters).
+    cin.ignore();
+    cout << "Enter your name (up to 10 characters): ";
+    getline(cin, name);
+    
+    //Verify the length of the name.  Must be < 10 characters
+    int inLen = name.length();
+
+    //Keep asking user for input until a valid name is entered.
+    while (inLen > 10){
+        cout << "Enter your name (up to 10 characters): ";
+        getline(cin, name);
+        inLen = name.length();
+    }
+    
     //Save the user name and score to files appending to the end.
     //Define files
     fstream outFile1;                           //User name
@@ -138,11 +192,14 @@ int main() {
     cout << "hit any other key to exit...";
     cin >> again;
     
+    //Continue if "Y"es, otherwise end the game.
     if (again == 'Y' || again == 'y')
         main();
+    else
+        return 0;
 
     //Exit stage left
-    return 0;
+    //return 0;
 }
 
 //This function is called by main.  It displays the game board on the screen.
@@ -233,7 +290,7 @@ void makeAray (char simon[],int SIZE){
                      break;
             case 3 : simon[count] = 'Y';                //Y for Yellow
                      break;
-            case 4 : simon[count] = 'B';                //B for Blue
+            default: simon[count] = 'B';                //B for Blue
                      break;
         }
    }    
@@ -261,7 +318,7 @@ int getUsrIn(char user[], int n){
     for (int x = 0; x < n; x++){
         user[x] = input[x];
     }    
-    
+
     //Test the length of the input.  It must be equal to the current iteration.
     len = input.length();
     (len == n) ? goodL = 1 : goodL = 0; 
@@ -305,6 +362,8 @@ void advDis (){
     }
 }
 
+//This function is called by main function.  It is used to get the skill level
+//the user wishes to play. 
 int getSkill (int &aSize){
     
     //Declare variables
@@ -327,15 +386,17 @@ int getSkill (int &aSize){
         cin >> skill;
     }
     
+    //Assign the size of the "simon" array to one of the following.
     switch (skill){
-        case 1 : aSize = 5;
+        case 1 : aSize = 10;
         break;
-        case 2 : aSize = 10;
+        case 2 : aSize = 15;
         break;
-        default : aSize = 20;
+        default : aSize = 25;
         break;
     }
 
+    //Returns the skill level selected by the user
     return skill;
 }
 
@@ -350,24 +411,27 @@ void disScore (){
     //Define variables
     string inName;
     int inScore;
-    int cnt1, cnt2, numRecs;
+    int cnt;
+    int numRecs = 0;
     
-    //Define file
+    //Define the files
     ifstream inFile1;                   //Input user names
     ifstream inFile2;                   //Input user scores
     
-    //Open the input file
+    //Open the input files
     inFile1.open("userNames.txt");
     inFile2.open("userScores.txt");
     
+    //Get number of records from the name.txt file
     numRecs = getrNum();
-    
+ 
+    //Read the names from the file and store in a
+    //vector to be sorted later.
     if (inFile1)
     {
-        //Read the names from the file and store in a
-        //vector to be sorted later.
-        for (cnt1 = 0; cnt1 < numRecs; cnt1++){
-            while (inFile1 >> inName){
+         for (cnt = 0; cnt < numRecs; cnt++){
+            while (inFile1){
+                getline(inFile1, inName);
                 aName.push_back(inName);
               }
           }
@@ -381,11 +445,11 @@ void disScore (){
     //Close the user name file.
     inFile1.close();
     
+    //Read the scores from the file and store in a
+    //vector to be sorted later.
     if (inFile2)
     {
-        //Read the names from the file and store in a
-        //vector to be sorted later.
-        for (cnt2 = 0; cnt2 < numRecs; cnt2++){
+        for (cnt = 0; cnt < numRecs; cnt++){
             while (inFile2 >> inScore){
                 aScore.push_back(inScore);
               }
@@ -401,32 +465,43 @@ void disScore (){
     inFile2.close();
     
     //Sort the name and scores array dictated by the highest to lowest score.
-    //We will display only the top 10 scores.
-    sortAray(aScore, aName, numRecs);
+    //Goes to the sort function if there is more than 1 score saved, otherwise
+    //list the 1 score in the file here.
+    if (numRecs > 1)
+        sortAray(aScore, aName, numRecs);
+    else
+    {
+        //Display the top 10 high scores
+        cout << "\t\t TOP 10 SCORERS " << endl;
+        cout << "\t Player " << "\t\tScore" << endl;
+        for (int z = 0; ((z < numRecs)); z++ ){
+            cout << "\t" << setw(10) << aName[z] << "\t\t" << aScore[z] << endl;
+        }
+    }
     
- 
 }
 
+//This function is called by disScore.  It is used to read the number of scores
+//in the userScores.txt file to get the range to fill the vectors.  
 int getrNum(){
     
     //Declare variables
     int numRecs = 0;
-    string inName;
+    int inScore;
     
     //Define input file
-    ifstream inFile;                   //Input user names
-    
-    //Open input file
-    //Open the input file
-    inFile.open("userNames.txt");
+    ifstream inFile;                   //Input scores
+
+    //Open the user scores file to count the number of scores in it
+    inFile.open("userScores.txt");
     
     //Get the number of actual records first.
     if (inFile)
     {
-        //Read the names in the file and count them. 
-        while (inFile >> inName)
+         //Read the names in the file and count them. 
+        while (inFile >> inScore)
         {
-            numRecs++;
+                numRecs++;
         }
     }
     else
@@ -437,17 +512,20 @@ int getrNum(){
  
     //Close the input file
     inFile.close();
- 
+    
     return numRecs;
 }
 
+//This function is called by disScore function.  It does a parallel sort of
+//two vectors in descending order.  
 void sortAray (vector<int> aScore, vector<string> aName, int numRecs){
 
     //Declare variables
     bool swap;
-    int temp1;
+    int temp1, numScr;
     string temp2;
     
+    //Bubble sort
     do
     {
         swap = false;
@@ -469,13 +547,23 @@ void sortAray (vector<int> aScore, vector<string> aName, int numRecs){
     }while (swap);
     
     //Scroll down 20 lines to get a clean display
-    cout << string(20, '\n');         
-    
-    //Display the top 10 high scores
-    cout << "\t TOP 10 SCORERS " << endl;
-    cout << "\t Player " << "\tScore" << endl;
-    for (int z = 0; z < 10; z++ ){
-        cout << "\t" << aName[z] << "\t\t" << aScore[z] << endl;
+    for (int j = 1; j < 21; j++){     //Push down 20 lines to clear screen
+        cout << "\n";
     }
     
+    //Display the top 10 high scores
+    cout << "\t\t TOP 10 SCORERS " << endl;
+    cout << "\t Player " << "\t\tScore" << endl;
+    
+    //Loop up to 10 times.  If less than 10 than loop until the number of
+    //records has been reached.  Once it has reached 10, then continue to 
+    //display only the top 10.
+    if (numRecs < 10)
+        numScr = numRecs;
+    else
+        numScr = 10;
+                
+    for (int z = 0; z < numScr; z++ ){
+        cout << "\t" << setw(10) << aName[z] << "\t\t" << aScore[z] << endl;
+    }
 }
