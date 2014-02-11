@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Assignment5_Prob1_MarkSort_Converted
+PROJECTNAME=Assignment5_Prob4_MarkSort_ADT
 
 # Active Configuration
 DEFAULTCONF=Debug

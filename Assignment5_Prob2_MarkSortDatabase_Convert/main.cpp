@@ -1,11 +1,11 @@
 /*
 * File: main.cpp
 * Author: Leo Gutierrez
-* Created on February 3, 2014, 8:13 AM
+* Assignment 5 Problem 2 
+* Convert Mark_Sort_Database to use only pointer notation.
 * 
-* Rewrite this to use pointer notation
+* Created on February 3, 2014, 8:13 AM
 */
-
 
 //System Libraries
 #include <cstdlib>
@@ -36,31 +36,38 @@ int main() {
     //Fill the arrays
     array = filAray(index, SIZE);
     
-    //Print the arrays
-    prntAry(array,index,SIZE,10);
+    //Print the original unsorted array using the index.
+    prntAry(array, index, SIZE, 10);
     
     //Test out the min pos routine
-    mrkSort(array,index,SIZE);
+    mrkSort(array, index, SIZE);
     
-    //Print the array
-    prntAry(array,index,SIZE,10);
-    prntAry(index,SIZE,10);
-    prntAry(array,SIZE,10);
+    //Print the array sorted using the index.
+    prntAry(array, index, SIZE, 10);
     
+    //Print the array's indexes instead of the values.
+    prntAry(index, SIZE, 10);
+
+    //Print the original array unsorted. 
+    prntAry(array, SIZE, 10);
+        
     //Clear array
     delete [] array;
-    
     
     //Exit Stage Right!!!
     return 0;
 }
 
+//Mark sort function called by main.  Sorts the array.
 void mrkSort(int *a,int *indx,int n){
+        
     for(int i = 0; i < n - 1; i++){
         minPos(a, indx, n, i);
     }
 }
 
+//This function is called by mrkSort.
+//Find the minimum position in conjuction with the mrkSort function.
 void minPos(int *a, int *indx, int n, int pos){
     for(int i = pos + 1; i < n; i++){
         if(*(a + *(indx + pos)) > *(a + *(indx + i)))
@@ -68,13 +75,17 @@ void minPos(int *a, int *indx, int n, int pos){
     }
 }
 
+//Function called by minPos function.  Swaps values.
 void swap(int &a,int &b){
     int temp=a;
     a=b;
     b=temp;
 }
 
-void prntAry(int *a,int n,int perLine){
+//Function prntAry called by main.  Prints the array without using the
+//index.
+void prntAry(int *a, int n, int perLine){
+        
     cout << endl;
     for(int i=0; i<n; i++){
         cout << *(a+i)<<" ";
@@ -84,7 +95,9 @@ void prntAry(int *a,int n,int perLine){
     cout<<endl;
 }
 
+//Function prntAry called by main.  Prints the array using the index.
 void prntAry(int *a, int *indx, int n, int perLine){
+    
     cout << endl;
     for(int i = 0; i < n; i++){
         cout << *(a + *(indx+i)) << " ";
@@ -94,8 +107,9 @@ void prntAry(int *a, int *indx, int n, int perLine){
     cout<<endl;
 }
 
-//2 Digit random numbers
+//Fills the array with 2 digit random numbers.
 int *filAray(int *indx, int n){
+    cout << " ";
     int *array = new int[n];
     for(int i = 0; i < n; i++){
         *(array + i) = rand() % 90 + 10;

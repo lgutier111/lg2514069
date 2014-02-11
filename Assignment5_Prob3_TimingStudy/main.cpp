@@ -1,10 +1,11 @@
 /*
 * File: main.cpp
 * Author: Leo Gutierrez
-* Created on February 3, 2014, 8:13 AM
-* 
+* Assignment 5 Problem 3
 * Change this code to use a bubble sort and a selection sort and plot
-*   how long the sort takes in comparison to other sorts.
+* how long the sort takes in comparison to other sorts.
+* 
+* Created on February 3, 2014, 8:13 AM
 * 
 */
 

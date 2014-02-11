@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin_4.x-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin_4.x-Windows
-CND_ARTIFACT_NAME_Debug=assignment5_prob2_marksortdatabase_convert
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin_4.x-Windows/assignment5_prob2_marksortdatabase_convert
+CND_ARTIFACT_NAME_Debug=assignment5_prob4_marksort_adt
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin_4.x-Windows/assignment5_prob4_marksort_adt
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin_4.x-Windows/package
-CND_PACKAGE_NAME_Debug=assignment5prob2marksortdatabaseconvert.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin_4.x-Windows/package/assignment5prob2marksortdatabaseconvert.tar
+CND_PACKAGE_NAME_Debug=assignment5prob4marksortadt.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin_4.x-Windows/package/assignment5prob4marksortadt.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin_4.x-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin_4.x-Windows
-CND_ARTIFACT_NAME_Release=assignment5_prob2_marksortdatabase_convert
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin_4.x-Windows/assignment5_prob2_marksortdatabase_convert
+CND_ARTIFACT_NAME_Release=assignment5_prob4_marksort_adt
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin_4.x-Windows/assignment5_prob4_marksort_adt
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin_4.x-Windows/package
-CND_PACKAGE_NAME_Release=assignment5prob2marksortdatabaseconvert.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin_4.x-Windows/package/assignment5prob2marksortdatabaseconvert.tar
+CND_PACKAGE_NAME_Release=assignment5prob4marksortadt.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin_4.x-Windows/package/assignment5prob4marksortadt.tar
 #
 # include compiler specific variables
 #

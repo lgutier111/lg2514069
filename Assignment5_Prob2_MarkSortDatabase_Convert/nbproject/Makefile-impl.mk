@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=MarkSortDatabase_Convert
+PROJECTNAME=Assignment5_Prob2_MarkSortDatabase_Convert
 
 # Active Configuration
 DEFAULTCONF=Debug

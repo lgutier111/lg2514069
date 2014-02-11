@@ -1,9 +1,11 @@
 /*
 * File: main.cpp
 * Author: Leo Gutierrez
-* Created on February 3, 2014, 8:13 AM
+*
+* Assignment 5 - Problem 1
+* Convert Mark_Sort to dynamic allocation using only pointer notation
 * 
-* Re write using pointer notation
+* Created on February 3, 2014, 8:13 AM
 */
 
 //System Libraries
@@ -15,17 +17,15 @@ using namespace std;
 //Global Constants
 
 //Function Prototypes
-//void filAray(int *, int);
 int *filAray(int);
 void prntAry(int *,int,int);
 void swap(int &,int &);
 void swap(int *,int,int);
 void minPos(int *,int,int);
 void mrkSort(int *,int);
-//void xcopy(const int *,int *,int);
 int *xcopy(const int *,int);
 
-//Executions Begin Here!
+//Begin program
 int main() {
     //Declare variables and initialize the
     const int SIZE=200;
@@ -56,7 +56,7 @@ int main() {
     return 0;
 }
 
-//void xcopy(const int *a,int *b,int n){
+//Copy the A array to the B array
 int *xcopy(const int *a, int n){
     int *brray = new int[n];
     for(int i = 0; i < n; i++){
@@ -66,12 +66,14 @@ int *xcopy(const int *a, int n){
     return brray;
 }
 
+//Use the mark sort routine
 void mrkSort(int *a,int n){
     for(int i = 0; i < n - 1; i++){
         minPos(a, n, i);
     }
 }
 
+//Find the min position for the mark sort routine.
 void minPos(int *a, int n, int pos){
     for(int i = pos + 1; i < n; i++){
         if(a[pos] > *(a+i))
@@ -80,18 +82,21 @@ void minPos(int *a, int n, int pos){
     }
 }
 
+//Swap a and b
 void swap(int &a,int &b){
     int temp = a;
     a = b;
     b = temp;
 }
 
+//Swap a and b
 void swap(int *a,int i,int j){
     int temp=*(a+1);
     *(a+1)=*(a+j);
     *(a+j)=temp;
 }
 
+//Print the array
 void prntAry(int *a,int n,int perLine){
     cout << endl;
     for(int i = 0; i < n; i++){
@@ -102,7 +107,7 @@ void prntAry(int *a,int n,int perLine){
     cout<<endl;
 }
 
-//2 Digit random numbers
+//Fill the A array with 2 Digit random numbers
 int *filAray(int n){
     int *array = new int[n];
     for(int i = 0; i < n; i++){
