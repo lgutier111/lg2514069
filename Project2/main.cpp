@@ -480,7 +480,6 @@ void sortAray (vector<int> aScore, vector<string> aName, int numRecs){
     int temp1, numScr;
     string temp2;
     string users[SIZE];                         //Array of 5 users
-    string holdUsr;                             //Hold a name
     bool noMatch;                               //No Match
     int x = 0, u = 0;                           //initialize counters
     
@@ -680,9 +679,7 @@ void srch (vector<string> aName, vector<int> aScore, string users[],
     int usr = 5;
     int scr = 5;
     int scoreLst[usr][scr];         //scoreLst [row][column]
-    int numElem, value;
-    int index = 0, x = 0, y = 0;   //Subscripts 
-    int position = -1;             //To record a position of search value
+    int x = 0, y = 0;              //Subscripts 
     bool found = false;            //Flag to indicate if the value was found
     string srchName;               //Hold name to search the aName array
     
